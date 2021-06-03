@@ -1,0 +1,46 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    hello !
+    <div id="nowTime"></div>
+
+
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+	<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+	<script type="text/javascript">
+        window.onload = function(){
+            setInterval("nowTime()",500);
+        }
+        function nowTime(){
+                var time=new Date();
+                var year=time.getFullYear();
+                var month=time.getMonth()+1;
+                var day=time.getDate();
+                
+                var h=time.getHours();
+                var m=time.getMinutes();
+                var s=time.getSeconds();
+                
+                h=check(h);
+                m=check(m);
+                s=check(s);
+                document.getElementById("nowTime").innerHTML="当前时间："+year+"年"+month+"月"+day+"日  "+h+":"+m+":"+s;
+            }
+            function check(i){
+                if(i<10){
+                    i="0"+i;
+                }
+                return i;
+            }
+    </script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <script>
+        //在页面未加载完毕之前显示的loading Html自定义内容
+        var _LoadingHtml = '<div id="loader"></div><style type="text/css">@import url("../css/login.css")</style>';
+        //呈现loading效果
+        document.write(_LoadingHtml);
+
+
+        //监听加载状态改变
+        document.onreadystatechange = completeLoading;
+
+        //加载状态为complete时移除loading效果
+        function completeLoading() {
+            if (document.readyState == "complete") {
+                var loadingMask = document.getElementById('loader');
+                loadingMask.parentNode.removeChild(loadingMask);
+                var app = document.getElementById('app');
+                app.style.display = 'inline';
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <video muted autoplay="autoplay" loop="loop">
+        <source src="../image/背景1.mp4">
+    </video>
+    <div id="app">
+        <div id="form">
+            <el-row>
+                <el-col :span="6" :offset="9">
+                    <el-form :model="loginForm">
+                        <el-form-item>
+                            <el-input v-model="loginForm.id" placeholder="管理员员工号" clearable id="id"></el-input>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-input v-model="loginForm.password" placeholder="密码" clearable show-password id="password"></el-input>
+                        </el-form-item>
+                    </el-form>
+                </el-col>
+            </el-row>
+            <el-row justify="center">
+                <el-col :span="1" :offset="10">
+                    <el-button>注册</el-button>
+                </el-col>
+                <el-col :span="1" :offset="2">
+                    <el-button @click="doLogin">登录</el-button>
+                </el-col>
+            </el-row>
+            <el-row justify="center">
+                <el-col :span="1" :offset = "11">
+                    
+                    <el-link type="primary">忘记密码</el-link>
+                </el-col>
+            </el-row>
+        </div>
+
+    </div>
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="/js/login.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>机动车车辆车库管理系统-添加界面</title>
+</head>
+<style>
+	@import url("../css/add.css");
+</style>
+
+<script>
+	//在页面未加载完毕之前显示的loading Html自定义内容
+	var _LoadingHtml = '<div id="loader"></div><style type="text/css">@import url("../css/add.css")</style>';
+	//呈现loading效果
+	document.write(_LoadingHtml);
+
+	//监听加载状态改变
+	document.onreadystatechange = completeLoading;
+
+	//加载状态为complete时移除loading效果
+	function completeLoading() {
+		if (document.readyState == "complete") {
+			var loadingMask = document.getElementById('loader');
+			loadingMask.parentNode.removeChild(loadingMask);
+			var app = document.getElementById('app');
+			app.style.display = 'block';
+			app.style.marginTop = '200px';
+		}
+	}
+</script>
+
+<body>
+	<div id="app" style="margin-top: 200px;display: none;">
+
+		<el-row>
+			<el-col :span="5" :offset="4">
+				<el-input type="text" id="carId" v-model="carInfo.carId" placeholder="车牌号" clearable></el-input>
+			</el-col>
+			<el-col :span="4" :offset="1">
+				<el-select v-model="carInfo.option" placeholder="请选择车辆类型" clearable>
+					<el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+					</el-option>
+				</el-select>
+			</el-col>
+			<el-col :span="5" :offset="1">
+				<el-input type="number" v-model="carInfo.location" placeholder="停放位置" name="carInfo"></el-input>
+			</el-col>
+		</el-row>
+
+		<el-row style="margin-top: 60px;">
+			<el-col :span="4" :offset="10">
+				<el-button @click="add()" id="button">添加</el-button>
+			</el-col>
+		</el-row>
+
+	</div>
+
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+	<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+	<script type="text/javascript" src="../js/add.js"></script>
+</body>
+
+</html>

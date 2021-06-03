@@ -1,0 +1,104 @@
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>机动车车辆车库管理系统-查询界面</title>
+	<style type="text/css">
+		@import url("../css/search.css");
+	</style>
+
+	
+	<script>
+		//在页面未加载完毕之前显示的loading Html自定义内容
+		var _LoadingHtml = '<div id="loader"></div><style type="text/css">@import url("../css/search.css")</style>';
+		//呈现loading效果
+		document.write(_LoadingHtml);
+		
+
+		//监听加载状态改变
+		document.onreadystatechange = completeLoading;
+
+		//加载状态为complete时移除loading效果
+		function completeLoading() {
+			if (document.readyState == "complete") {
+				var loadingMask = document.getElementById('loader');
+				loadingMask.parentNode.removeChild(loadingMask);
+				var app = document.getElementById('app');
+				app.style.display = 'inline';
+			}
+		}
+	</script>
+	
+
+</head>
+
+
+<body>
+	
+
+	<div id="app" style="display: none;">
+
+
+		<el-row :gutter="20" style="margin-bottom: 10px;margin-top: 10px;">
+			<el-col :span="8" :offset="8">
+				<el-input v-model="carId" placeholder="请 输 入 车 牌 号" width="300px" clearable @input="loadMessageByCarId">
+				</el-input>
+			</el-col>
+		</el-row>
+
+		<el-dialog title="详细信息" :visible.sync="dialogVisible" width="80%" :before-close="handleClose" center>
+			<el-table :data="fullMessage" border style="width: 100%" size="small">
+				<el-table-column prop="carId" label="车牌号" width="120" align="center">
+				</el-table-column>
+				<el-table-column prop="style" label="车辆类型" width="100" align="center">
+				</el-table-column>
+				<el-table-column prop="timeStart" label="起始时间" width="180" sortable align="center">
+				</el-table-column>
+				<el-table-column prop="timeEnd" label="结束时间" width="180" sortable align="center">
+				</el-table-column>
+				<el-table-column prop="location" label="停放位置" width="100" sortable align="center">
+				</el-table-column>
+			</el-table>
+			<br>
+			<p style="text-align: left;text-indent:7em;font-size: 10%;color: rgba(128, 128, 128, 0.534);">
+				注：&nbsp;车辆类型：1-小型车&nbsp;&nbsp;2-中型车&nbsp;&nbsp;3-大型车&nbsp;&nbsp;4-跑车&nbsp;&nbsp;5-其他类</p>
+			<span slot="footer" class="dialog-footer">
+				<span id="pay" style="display: inline;">
+					<el-button type="primary" @click="pay()">结 账</el-button>
+				</span>
+
+				<el-button @click="dialogVisible = false">关 闭</el-button>
+			</span>
+		</el-dialog>
+
+
+		<el-table :data="messages" border style="width: 100%" size="small" ref="multipleTable"
+			:default-sort="{prop: 'timeStart', order: 'ascending'}">
+			<el-table-column prop="carId" label="车牌号" width="150" align="center">
+			</el-table-column>
+			<el-table-column prop="timeStart" label="起始时间" width="230" sortable align="center">
+			</el-table-column>
+			<el-table-column prop="timeEnd" label="结束时间" width="230" sortable align="center">
+			</el-table-column>
+			<el-table-column label="操作" width="140" align="center">
+				<template slot-scope="scope">
+					<el-button @click="getFullMessage(scope.row)" type="text" size="small">查看详情</el-button>
+					<el-button @click="delMessage(scope.row)" type="text" size="small">删除</el-button>
+				</template>
+			</el-table-column>
+		</el-table>
+
+		<el-pagination @current-change="pageChange" background :current-page.sync="page.pn" :page-size="page.rn"
+			layout="prev, pager, next" :total="page.total">
+		</el-pagination>
+
+	</div>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+	<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+	<script type="text/javascript" src="../js/search.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+
+body{
+	height: 97%;
+}
+#app{
+	height: 100%;
+}
+
+#container {
+	height: 100%;
+}
+
+#header {
+	margin-top: 10px;
+	width: 100%;
+	height: 60px;
+	line-height: 60px;
+	background: rgba(71,122,198,0.2);
+	z-index: 1000;
+	-webkit-transform: translateX(0);
+	-ms-transform: translateX(0);
+	transform: translateX(0);
+}
+
+#footer {
+	width: 100%;
+	height: 60px;
+	background-color: #B3C0D1;
+	color: #333;
+	text-align: center;
+	line-height: 60px;
+}
+
+#left {
+	height: 100%;
+	background-color: #D3DCE6;
+	color: #333;
+	text-align: center;
+	line-height: 200px;
+}
+
+
+
+#main {
+
+	background-color: #E9EEF3;
+	color: #333;
+	text-align: center;
+	line-height: 160px;
+}
+
